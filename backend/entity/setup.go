@@ -12,7 +12,7 @@ func DB() *gorm.DB {
 }
 
 func SetupDatabase() {
-	database, err := gorm.Open(sqlite.Open("CheckingGrantGear.db"), &gorm.Config{})
+	database, err := gorm.Open(sqlite.Open("GrantGear.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
