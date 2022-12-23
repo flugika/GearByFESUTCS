@@ -107,26 +107,22 @@ function App() {
   }
 
   return (
-    <div className='App' style={{backgroundColor: '#141414', width: '100vw', height: '100vh'}}>
+    <div className='App' style={{backgroundColor: '#141414', width: '100%', height: '100%'}}>
 
       {/* Container for defualt page no scroll */}
       {/* better marginTop */}
-
       <Container style={{height: 40, backgroundColor: '#141414'}}></Container>
 
       {/* Logo */}
-
       <img style={{height: 200, justifyItems: 'center'}} src={LogoGear} alt="logo" />
 
       {/* Grid */}
+      <Grid container spacing={2} style={{paddingLeft: '10%', paddingRight: '10%', marginTop: -50}}>
 
-      <Grid container spacing={2} style={{paddingLeft: '20%', paddingRight: '20%', marginTop: -50}}>
         {/* Grid 12 */}
-
         <Grid item xs={12} >
 
           {/* Header */}
-
           <p style={{color: '#DCA24E', textAlign: 'center', fontSize: 48, fontWeight: 'bold'}}>
             คณะกรรมการประสานงานนักศึกษา <br />
             สำนักวิชาวิศวกรรมศาสตร์ <br />
@@ -138,7 +134,6 @@ function App() {
 
         {/* Demo Discription */}
         {/* Grid 2 + 10 */}
-
         <Grid item xs={2} ></Grid>
 
         <Grid item xs={10} >
@@ -166,16 +161,15 @@ function App() {
         </Grid>
 
         {/* Text Field Input */}
-        {/* Grid 2 + 4 + 2 + 2 */}
+        {/* Grid 6 + 3 + 3 */}
+        <Grid item xs={1.33}></Grid>
 
-        <Grid item xs={2} ></Grid>
-
-        <Grid item xs={4}>
+        <Grid item xs={4.4}>
           <TextField 
             fullWidth
             id="StudentID"
             value={StudentID}
-            placeholder="Please enter Student ID : B65XXXXX"
+            placeholder="กรอกรหัสนักศึกษา : B65XXXXX"
             defaultValue=""
             type="text"
             variant="outlined"
@@ -189,10 +183,9 @@ function App() {
         </Grid>
 
         {/* Search Button */}
-        
-        <Grid item xs={2} >
+        <Grid item xs={2.4} >
           <Button 
-            style={{fontWeight: "bold", fontSize:"sm", paddingLeft: '20%', paddingRight: '20%'}}
+            style={{fontWeight: "bold", fontSize:"sm"}}
             color="warning"
             fullWidth
             variant="contained"
@@ -202,10 +195,9 @@ function App() {
         </Grid>
 
         {/* Clear Button */}
-
-        <Grid item xs={2} >
+        <Grid item xs={2.4} >
           <Button 
-            style={{fontWeight: "bold", fontSize:"sm", paddingLeft: '20%', paddingRight: '20%'}}
+            style={{fontWeight: "bold", fontSize:"sm"}}
             value={StudentID + ""}
             color="inherit"
             fullWidth
@@ -214,12 +206,11 @@ function App() {
             >Clear
           </Button>
         </Grid>
-
-        <Grid item xs={2} ></Grid>
       </Grid>
 
-      {/* Alert Popup */}
+      <Grid item xs={1.4}></Grid>
 
+      {/* Alert Popup */}
       {Popup && (
         <div className="modal">
           <div onClick={togglePopup} className="overlay"></div>
@@ -244,11 +235,12 @@ function App() {
         </div>
       )}
       <br />
-      <Grid container spacing={2} style={{paddingLeft: '20%', paddingRight: '20%'}}>
+      <Grid container spacing={2} style={{paddingLeft: '10%', paddingRight: '10%'}}>
         <Container style={{height: 1, backgroundColor: '#FFFFFF', marginTop: 25}}></Container>
       </Grid>
       <br />
       <a style={{fontSize: 30, fontWeight: 'bold', color: '#DCA24E'}} target="_blank" href={FanpageUrl}>ประสานงานเกียร์ มทส</a>
+      <Container style={{height: 40, backgroundColor: '#141414'}}></Container>
     </div>
   );
 }
