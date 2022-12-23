@@ -133,10 +133,10 @@ function App() {
         </Grid>
 
         {/* Demo Discription */}
-        {/* Grid 2 + 10 */}
-        <Grid item xs={2} ></Grid>
+        {/* Grid 1.5 + 9 + 1.5 */}
+        <Grid item xs={1.5} ></Grid>
 
-        <Grid item xs={10} >
+        <Grid item xs={9} >
           <p style={{color: '#FFFFFF', textAlign: 'left'}}>
             <p style={{color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20}}>
               ผู้มีสิทธิ์เข้าร่วมงาน
@@ -160,8 +160,10 @@ function App() {
           </p>
         </Grid>
 
+        <Grid item xs={1.5} ></Grid>
+
         {/* Text Field Input */}
-        {/* Grid 6 + 3 + 3 */}
+        {/* Grid 1.33 + 4.4 + 2.4 + 2.4 + 1.4 */}
         <Grid item xs={1.33}></Grid>
 
         <Grid item xs={4.4}>
