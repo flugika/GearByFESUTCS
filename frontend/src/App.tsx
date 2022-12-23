@@ -3,6 +3,7 @@ import LogoGear from './logo/gear-logo.gif';
 import LogoEvent from './logo/event-logo.png';
 import './App.css';
 import "./popup/Modal.css";
+import videoUrl from './logo/gear-logo.mp4';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -10,6 +11,7 @@ import { Button, InputAdornment, styled } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
 function App() {
+  // Set useState
   const [StudentID, setStudentID] = React.useState<String>();
   const [PrefixName, setPrefixName] = useState<String>();
   const [FirstName, setFirstName] = useState<String>();
@@ -21,6 +23,11 @@ function App() {
   const [Desciption2, setDesciption2] = useState<String>("");
   const [Desciption3, setDesciption3] = useState<String>("");
 
+  // Set URL
+  const apiUrl = "http://localhost:8080";
+  const FanpageUrl = "https://www.facebook.com/Gear.sut";
+
+  // Set function split newline \n
   function replaceWithBr1() {
     return Desciption1.replace(/\n/g, "<br />")
   }
@@ -33,8 +40,7 @@ function App() {
     return Desciption3.replace(/\n/g, "<br />")
   }
   
-  const apiUrl = "http://localhost:8080";
-
+  // Toggle Popup
   const togglePopup = () => {
     setPopup(!Popup);
   };
@@ -45,7 +51,8 @@ function App() {
     document.body.classList.remove('active-modal')
   }
 
-  async function Submit() {
+  // Set Search Button
+  async function Search() {
     togglePopup()
     const requestOptions = {
       method: "GET",
@@ -68,20 +75,11 @@ function App() {
           setMajor("สำนักวิชา" + res.data.Major)
           setGrant("ท่านมีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
           setDesciption1("สร้อยน้องคล้องเกียร์พี่ครั้งที่ 9\nณ อาคารสุรพัฒน์ 2 | เวลา 12.00 น. เป็นต้นไป")
-          setDesciption2("1) กรุณานำบัตรนักศึกษาของตนเองมายืนยันตัวตนเข้างาน\n2) เริ่มลงทะเบียนเข้างาน 12.00 - 13.00 น. เท่านั้น กรุณามาให้ตรงเวลา\n3) การแต่งกาย\n> 3.1) เสื้อวิศวะสีเลือดหมู\n> 3.2) กางเกงขายาวไม่ขาด\n> 3.3) เข็มขัดตรามหาวิทยาลัย\n> 3.4) รองเท้าผ้าใบและถุงเท้า\n3.5) หากนำกระเป๋าเข้างานต้องมีขนาดไม่เกินกระดาษ A5 เท่านั้น")
+          setDesciption2("1) กรุณานำบัตรนักศึกษาของตนเองมายืนยันตัวตนเข้างาน\n2) เริ่มลงทะเบียนเข้างาน 12.00 - 13.00 น. เท่านั้น กรุณามาให้ตรงเวลา\n3) การแต่งกาย\n> 3.1) เสื้อวิศวะสีเลือดหมู\n> 3.2) กางเกงขายาวไม่ขาด\n> 3.3) เข็มขัดตรามหาวิทยาลัย\n> 3.4) รองเท้าผ้าใบและถุงเท้า\n4) หากนำกระเป๋าเข้างานต้องมีขนาดไม่เกินกระดาษ A5 เท่านั้น")
           setDesciption3(">> หากไม่ทำตามกฎระเบียบจะไม่มีสิทธิ์เข้าร่วมงาน <<")
-          console.log(res.data)
           return res.data;
         } else {
-          setPrefixName("")
-          setFirstName("")
-          setLastName("")
-          setMajor("")
-          setStudentID("")
-          setGrant("ท่านไม่มีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
-          setDesciption1("เกิดข้อผิดพลาด กรุณาตรวจสอบรหัสนักศึกษาให้ถูกต้อง")
-          setDesciption2("")
-          setDesciption3("หากมีข้อสงสัย กรุณาติดต่อที่เพจ \"ประสานงานเกียร์ มทส.\"\nก่อนวันที่ 10 เมษายน 2566")
+          Reset()
           return false;
         }
       });
@@ -89,11 +87,24 @@ function App() {
     return res;
   }
 
-  async function Clear() {
+  // Set Reset function
+  async function Reset() {
     setStudentID("")
+    setPrefixName("")
+    setFirstName("")
+    setLastName("")
+    setMajor("")
+    setStudentID("")
+    setGrant("ท่านไม่มีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
+    setDesciption1("เกิดข้อผิดพลาด กรุณาตรวจสอบรหัสนักศึกษาให้ถูกต้อง")
+    setDesciption2("")
+    setDesciption3("หากมีข้อสงสัย กรุณาติดต่อที่เพจ \"ประสานงานเกียร์ มทส\"\nก่อนวันที่ 10 เมษายน 2566")
   }
 
-  console.log(StudentID)
+  // Set Clear Button
+  async function Clear() {
+    Reset()
+  }
 
   return (
     <div className='App' style={{backgroundColor: '#141414', width: '100vw', height: '100vh'}}>
@@ -110,6 +121,8 @@ function App() {
       {/* Grid */}
 
       <Grid container spacing={2} style={{paddingLeft: '20%', paddingRight: '20%', marginTop: -50}}>
+        {/* Grid 12 */}
+
         <Grid item xs={12} >
 
           {/* Header */}
@@ -121,10 +134,15 @@ function App() {
           </p>
           <br /><br />
           <Container style={{height: 1, backgroundColor: '#FFFFFF', marginTop: -60}}></Container>
+        </Grid>
 
-          {/* Demo Discription */}
+        {/* Demo Discription */}
+        {/* Grid 2 + 10 */}
 
-          <p style={{color: '#FFFFFF', textAlign: 'left', paddingLeft: '10%'}}>
+        <Grid item xs={2} ></Grid>
+
+        <Grid item xs={10} >
+          <p style={{color: '#FFFFFF', textAlign: 'left'}}>
             <p style={{color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20}}>
               ผู้มีสิทธิ์เข้าร่วมงาน
             </p>
@@ -148,13 +166,16 @@ function App() {
         </Grid>
 
         {/* Text Field Input */}
+        {/* Grid 2 + 4 + 2 + 2 */}
 
-        <Grid item xs={8} >
+        <Grid item xs={2} ></Grid>
+
+        <Grid item xs={4}>
           <TextField 
             fullWidth
             id="StudentID"
             value={StudentID}
-            placeholder="Please enter Student ID : (B65XXXXX)"
+            placeholder="Please enter Student ID : B65XXXXX"
             defaultValue=""
             type="text"
             variant="outlined"
@@ -175,7 +196,7 @@ function App() {
             color="warning"
             fullWidth
             variant="contained"
-            onClick={Submit}
+            onClick={Search}
             >Search
           </Button>
         </Grid>
@@ -193,6 +214,8 @@ function App() {
             >Clear
           </Button>
         </Grid>
+
+        <Grid item xs={2} ></Grid>
       </Grid>
 
       {/* Alert Popup */}
@@ -211,8 +234,8 @@ function App() {
               <p dangerouslySetInnerHTML={{__html: replaceWithBr1()}} style={{fontWeight: 'bold', marginTop: -10, color: '#141414'}}/>
               <p dangerouslySetInnerHTML={{__html: replaceWithBr2()}} style={{fontSize: 24, textAlign: 'left', marginTop: -30}}/>
               <p dangerouslySetInnerHTML={{__html: replaceWithBr3()}} style={{fontSize: 24, marginTop: -30, fontWeight: 'bold'}}/>
-              <a style={{fontWeight: 'bold', color: '#9A6914'}} target="_blank" href="https://www.facebook.com/Gear.sut">Facebook: ประสานงานเกียร์ มทส</a>
-              <p style={{fontSize: 24, marginTop: -5}}>ด้วยความเคารพอย่างสูง จากคปว.</p>
+              <a style={{fontWeight: 'bold', color: '#9A6914'}} target="_blank" href={FanpageUrl}>Facebook: ประสานงานเกียร์ มทส</a>
+              <p style={{fontSize: 24, marginTop: -5}}>ด้วยความเคารพอย่างสูง</p>
             </i>
             <button className="close-modal" onClick={togglePopup}>
               Close
@@ -225,7 +248,7 @@ function App() {
         <Container style={{height: 1, backgroundColor: '#FFFFFF', marginTop: 25}}></Container>
       </Grid>
       <br />
-      <a style={{fontSize: 30, fontWeight: 'bold', color: '#DCA24E'}} target="_blank" href="https://www.facebook.com/Gear.sut">ประสานงานเกียร์ มทส</a>
+      <a style={{fontSize: 30, fontWeight: 'bold', color: '#DCA24E'}} target="_blank" href={FanpageUrl}>ประสานงานเกียร์ มทส</a>
     </div>
   );
 }
