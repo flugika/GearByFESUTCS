@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/flugika/GearByFESUTCS/controller"
 	"github.com/flugika/GearByFESUTCS/entity"
-	"github.com/flugika/GearByFESUTCS/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,17 +14,11 @@ func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	router := r.Group("/")
-	{
-		router.Use(middlewares.Authorizes())
-		{
-			// Student Routes
-			router.GET("/student/:id", controller.GetStudent)
-		}
-	}
+	// Student Routes
+	r.GET("/student/:id", controller.GetStudent)
 
-	// Run the server go run main.go
-	r.Run("localhost: " + PORT)
+	// Run the server
+	r.Run()
 }
 
 func CORSMiddleware() gin.HandlerFunc {

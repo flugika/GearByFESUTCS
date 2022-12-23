@@ -12,9 +12,10 @@ import (
 func GetStudent(c *gin.Context) {
 	var student entity.Student
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM students WHERE id = ?", id).Scan(&student).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	if tx := entity.DB().Where("student_id = ?", id).First(&student); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "student not found"})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{"data": student})
 }
