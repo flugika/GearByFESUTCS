@@ -4,11 +4,15 @@ import (
 	"github.com/flugika/GearByFESUTCS/controller"
 	"github.com/flugika/GearByFESUTCS/entity"
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 const PORT = "8080"
 
 func main() {
+	// Delete database file before BUILD and RUN
+	os.Remove("./GrantGear.db")
+
 	entity.SetupDatabase()
 
 	r := gin.Default()

@@ -24,7 +24,7 @@ function App() {
   const [Desciption3, setDesciption3] = useState<String>("");
 
   // Set URL
-  const apiUrl = "http://localhost:8080";
+  const apiUrl = "http://localhost";
   const FanpageUrl = "https://www.facebook.com/Gear.sut";
 
   // Set function split newline \n
@@ -39,13 +39,13 @@ function App() {
   function replaceWithBr3() {
     return Desciption3.replace(/\n/g, "<br />")
   }
-  
+
   // Toggle Popup
   const togglePopup = () => {
     setPopup(!Popup);
   };
 
-  if(Popup) {
+  if (Popup) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
@@ -60,12 +60,12 @@ function App() {
         "Content-Type": "application/json",
       },
     };
-  
+
     let res = await fetch(
       `${apiUrl}/student/${StudentID}`,
       requestOptions
     )
-      
+
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -83,7 +83,7 @@ function App() {
           return false;
         }
       });
-  
+
     return res;
   }
 
@@ -107,29 +107,29 @@ function App() {
   }
 
   return (
-    <div className='App' style={{backgroundColor: '#141414', width: '100%', height: '100%'}}>
+    <div className='App' style={{ backgroundColor: '#141414', width: '100%', height: '100%' }}>
 
       {/* Container for defualt page no scroll */}
       {/* better marginTop */}
-      <Container style={{height: 40, backgroundColor: '#141414'}}></Container>
+      <Container style={{ height: 40, backgroundColor: '#141414' }}></Container>
 
       {/* Logo */}
-      <img style={{height: 200, justifyItems: 'center'}} src={LogoGear} alt="logo" />
+      <img style={{ height: 200, justifyItems: 'center' }} src={LogoGear} alt="logo" />
 
       {/* Grid */}
-      <Grid container spacing={2} style={{paddingLeft: '10%', paddingRight: '10%', marginTop: -50}}>
+      <Grid container spacing={2} style={{ paddingLeft: '10%', paddingRight: '10%', marginTop: -50 }}>
 
         {/* Grid 12 */}
         <Grid item xs={12} >
 
           {/* Header */}
-          <p style={{color: '#DCA24E', textAlign: 'center', fontSize: 48, fontWeight: 'bold'}}>
+          <p style={{ color: '#DCA24E', textAlign: 'center', fontSize: 48, fontWeight: 'bold' }}>
             คณะกรรมการประสานงานนักศึกษา <br />
             สำนักวิชาวิศวกรรมศาสตร์ <br />
             มหาวิทยาลัยเทคโนโลยีสุรนารี (คปว.)
           </p>
           <br /><br />
-          <Container style={{height: 1, backgroundColor: '#FFFFFF', marginTop: -60}}></Container>
+          <Container style={{ height: 1, backgroundColor: '#FFFFFF', marginTop: -60 }}></Container>
         </Grid>
 
         {/* Demo Discription */}
@@ -137,24 +137,24 @@ function App() {
         <Grid item xs={1.5} ></Grid>
 
         <Grid item xs={9} >
-          <p style={{color: '#FFFFFF', textAlign: 'left'}}>
-            <p style={{color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20}}>
+          <p style={{ color: '#FFFFFF', textAlign: 'left' }}>
+            <p style={{ color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20 }}>
               ผู้มีสิทธิ์เข้าร่วมงาน
             </p>
-            <p style={{fontSize: 24, marginTop: -25}}>
+            <p style={{ fontSize: 24, marginTop: -25 }}>
               1) นักศึกษาสำนักวิชาวิศวกรรมศาสตร์ที่มีรหัสนักศึกษา B65XXXXX <br />
               2) นักศึกษาสำนักวิชาวิศวกรรมศาสตร์ที่ "รีรหัสนักศึกษา" จาก B65 เป็น B66 เท่านั้น <br />
             </p>
-            <p style={{color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20}}>
+            <p style={{ color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20 }}>
               วิธีตรวจสอบ
             </p>
-            <p style={{fontSize: 24, marginTop: -25}}>
+            <p style={{ fontSize: 24, marginTop: -25 }}>
               1) กรอกรหัสนักศึกษา B65XXXXX ในช่องว่าง <br />
               2) กด Search เพื่อค้นหารหัสนักศึกษา <br />
               3) กด Clear เพื่อลบข้อมูลในช่องใส่รหัสนักศึกษาและค้นหารหัสนักศึกษาอื่นต่อไป
             </p>
             <br />
-            <p style={{color: '#F5D3A2', fontSize: 18, marginTop: -25}}>
+            <p style={{ color: '#F5D3A2', fontSize: 18, marginTop: -25 }}>
               หมายเหตุ: นักศึกษาที่รีรหัสนักศึกษาจาก B65 เป็น B66 ต้องใช้รหัสนักศึกษา B65XXXXX ในการค้นหาเท่านั้น
             </p>
           </p>
@@ -167,7 +167,7 @@ function App() {
         <Grid item xs={1.33}></Grid>
 
         <Grid item xs={4.4}>
-          <TextField 
+          <TextField
             fullWidth
             id="StudentID"
             value={StudentID}
@@ -186,26 +186,26 @@ function App() {
 
         {/* Search Button */}
         <Grid item xs={2.4} >
-          <Button 
-            style={{fontWeight: "bold", fontSize:"sm"}}
+          <Button
+            style={{ fontWeight: "bold", fontSize: "sm" }}
             color="warning"
             fullWidth
             variant="contained"
             onClick={Search}
-            >Search
+          >Search
           </Button>
         </Grid>
 
         {/* Clear Button */}
         <Grid item xs={2.4} >
-          <Button 
-            style={{fontWeight: "bold", fontSize:"sm"}}
+          <Button
+            style={{ fontWeight: "bold", fontSize: "sm" }}
             value={StudentID + ""}
             color="inherit"
             fullWidth
             variant="contained"
             onClick={Clear}
-            >Clear
+          >Clear
           </Button>
         </Grid>
       </Grid>
@@ -216,19 +216,19 @@ function App() {
       {Popup && (
         <div className="modal">
           <div onClick={togglePopup} className="overlay"></div>
-          <div className="modal-content" style={{color: '#141414'}}>
-            <img style={{height: 100, justifyItems: 'center'}} src={LogoEvent} alt="logo" />
-            <p style={{fontSize: 38, fontWeight: 'bold', marginTop: -5}}>{Grant}</p>
-            <p style={{fontSize: 24, marginTop: -35}}>
+          <div className="modal-content" style={{ color: '#141414' }}>
+            <img style={{ height: 100, justifyItems: 'center' }} src={LogoEvent} alt="logo" />
+            <p style={{ fontSize: 38, fontWeight: 'bold', marginTop: -5 }}>{Grant}</p>
+            <p style={{ fontSize: 24, marginTop: -35 }}>
               {StudentID} {PrefixName}{FirstName} {LastName} <br />
               {Major}
             </p>
-            <i style={{fontSize: 30, color: '#6D6D68'}}>
-              <p dangerouslySetInnerHTML={{__html: replaceWithBr1()}} style={{fontWeight: 'bold', marginTop: -10, color: '#141414'}}/>
-              <p dangerouslySetInnerHTML={{__html: replaceWithBr2()}} style={{fontSize: 24, textAlign: 'left', marginTop: -30}}/>
-              <p dangerouslySetInnerHTML={{__html: replaceWithBr3()}} style={{fontSize: 24, marginTop: -30, fontWeight: 'bold'}}/>
-              <a style={{fontWeight: 'bold', color: '#9A6914'}} target="_blank" href={FanpageUrl}>Facebook: ประสานงานเกียร์ มทส</a>
-              <p style={{fontSize: 24, marginTop: -5}}>ด้วยความเคารพอย่างสูง</p>
+            <i style={{ fontSize: 30, color: '#6D6D68' }}>
+              <p dangerouslySetInnerHTML={{ __html: replaceWithBr1() }} style={{ fontWeight: 'bold', marginTop: -10, color: '#141414' }} />
+              <p dangerouslySetInnerHTML={{ __html: replaceWithBr2() }} style={{ fontSize: 24, textAlign: 'left', marginTop: -30 }} />
+              <p dangerouslySetInnerHTML={{ __html: replaceWithBr3() }} style={{ fontSize: 24, marginTop: -30, fontWeight: 'bold' }} />
+              <a style={{ fontWeight: 'bold', color: '#9A6914' }} target="_blank" href={FanpageUrl}>Facebook: ประสานงานเกียร์ มทส</a>
+              <p style={{ fontSize: 24, marginTop: -5 }}>ด้วยความเคารพอย่างสูง</p>
             </i>
             <button className="close-modal" onClick={togglePopup}>
               Close
@@ -237,12 +237,12 @@ function App() {
         </div>
       )}
       <br />
-      <Grid container spacing={2} style={{paddingLeft: '10%', paddingRight: '10%'}}>
-        <Container style={{height: 1, backgroundColor: '#FFFFFF', marginTop: 25}}></Container>
+      <Grid container spacing={2} style={{ paddingLeft: '10%', paddingRight: '10%' }}>
+        <Container style={{ height: 1, backgroundColor: '#FFFFFF', marginTop: 25 }}></Container>
       </Grid>
       <br />
-      <a style={{fontSize: 30, fontWeight: 'bold', color: '#DCA24E'}} target="_blank" href={FanpageUrl}>ประสานงานเกียร์ มทส</a>
-      <Container style={{height: 40, backgroundColor: '#141414'}}></Container>
+      <a style={{ fontSize: 30, fontWeight: 'bold', color: '#DCA24E' }} target="_blank" href={FanpageUrl}>ประสานงานเกียร์ มทส</a>
+      <Container style={{ height: 40, backgroundColor: '#141414' }}></Container>
     </div>
   );
 }
