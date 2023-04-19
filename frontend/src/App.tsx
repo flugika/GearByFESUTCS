@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import LogoGear from './logo/gear-logo.gif';
 import LogoEvent from './logo/event-logo.png';
 import LogoFacebook from './logo/facebook-logo.png';
@@ -7,7 +7,7 @@ import "./popup/Modal.css";
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import { Box, Button, Link } from '@mui/material';
+import { Box, Button, Divider } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
 function App() {
@@ -16,7 +16,6 @@ function App() {
   const [PrefixName, setPrefixName] = useState<String>();
   const [FirstName, setFirstName] = useState<String>();
   const [LastName, setLastName] = useState<String>();
-  const [Major, setMajor] = useState<String>();
   const [Popup, setPopup] = useState(false);
   const [Grant, setGrant] = useState<String>();
   const [Desciption1, setDesciption1] = useState<String>("");
@@ -68,14 +67,13 @@ function App() {
       .then((res) => {
         console.log(res[0])
         if (res[0]) {
-          setPrefixName(res[0].pre_name)
-          setFirstName(res[0].first_name)
-          setLastName(res[0].last_name)
-          setMajor("สำนักวิชา" + res[0].major)
+          setPrefixName(res[0].PREFIXNAME)
+          setFirstName(res[0].STUDENTNAME)
+          setLastName(res[0].STUDENTSURNAME)
           setGrant("ท่านมีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
-          setDesciption1("สร้อยน้องคล้องเกียร์พี่ครั้งที่ 9\nณ อาคารเฉลิมพระเกียรติ 80 พรรษา | เวลา 12.00 น. เป็นต้นไป")
-          setDesciption2("1) กรุณานำบัตรนักศึกษาของตนเองมายืนยันตัวตนเข้างาน\n2) เริ่มลงทะเบียนเข้างาน 12.00 - 13.00 น. เท่านั้น กรุณามาให้ตรงเวลา\n3) การแต่งกาย\n> 3.1) เสื้อวิศวะสีเลือดหมู\n> 3.2) กางเกงขายาวไม่ขาด ไม่มีลาย\n> 3.3) สีของกางเกงที่ใส่ได้ ดำ กรม น้ำเงิน น้ำตาล ขาว ครีม เทา\n> 3.4) เข็มขัดตรามหาวิทยาลัย\n> 3.5) รองเท้าผ้าใบและถุงเท้า\n4) หากนำกระเป๋าเข้างานต้องมีขนาดไม่เกินกระดาษ A5 เท่านั้น")
-          setDesciption3(">> หากไม่ทำตามกฎระเบียบจะไม่มีสิทธิ์เข้าร่วมงาน <<")
+          setDesciption1("ณ อาคารเฉลิมพระเกียรติ 80 พรรษา | เวลา 12.00 น. เป็นต้นไป")
+          setDesciption2("1) กรุณานำบัตรนักศึกษาของตนเองมาเพื่อยืนยันตัวตนเข้างาน\n2) การแต่งกาย\n > 2.1) เสื้อวิศวะ สีเลือดหมู\n > 2.2) กางเกงขายาว ไม่ขาด ไม่มีลวดลาย สีสุภาพ\n > 2.3) เข็มขัดตรามหาวิทยาลัย\n > 2.4) สวมรองเท้าผ้าใบและถุงเท้า\n > 2.5) สามารถใส่ปลอกแขนได้ สี ดำ กรม เทา ขาว\n > 2.6) ไม่อนุญาตให้ใส่เสื้อแขนยาวเข้าร่วมงาน\n > 2.7) ไม่อนุญาตให้ใส่หมวกเข้าร่วมงาน\n > 2.8) หากนำกระเป๋าเข้างาน ต้องมีขนาดไม่เกินกระดาษ A5 (A4 พับครึ่ง)\n3) เริ่มลงทะเบียนเข้างาน 12:00 - 13:00 น. เท่านั้น กรุณามาให้ตรงเวลา")
+          setDesciption3(">> หากไม่ทำตามกฎระเบียบกำหนดการจะไม่มีสิทธิ์ได้เข้ารับเกียร์ <<")
           return res[0].data;
         } else {
           Clear()
@@ -93,8 +91,6 @@ function App() {
     setPrefixName("")
     setFirstName("")
     setLastName("")
-    setMajor("")
-    setStudentID("")
     setGrant("ท่านไม่มีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
     setDesciption1("เกิดข้อผิดพลาด กรุณาตรวจสอบรหัสนักศึกษาให้ถูกต้อง")
     setDesciption2("")
@@ -135,8 +131,7 @@ function App() {
               ผู้มีสิทธิ์เข้าร่วมงาน
             </p>
             <p style={{ fontSize: 24, marginTop: -25 }}>
-              1) นักศึกษาสำนักวิชาวิศวกรรมศาสตร์ที่มีรหัสนักศึกษา B65XXXXX <br />
-              2) นักศึกษาสำนักวิชาวิศวกรรมศาสตร์ที่ "รีรหัสนักศึกษา" จาก B65 เป็น B66 เท่านั้น <br />
+              นักศึกษาสำนักวิชาวิศวกรรมศาสตร์ที่มีรหัสนักศึกษา B65XXXXX เท่านั้น <br />
             </p>
             <p style={{ color: '#F5D3A2', fontSize: 32, fontWeight: 'bold', marginTop: 20 }}>
               วิธีตรวจสอบ
@@ -147,9 +142,6 @@ function App() {
               3) กด Clear เพื่อลบข้อมูลในช่องใส่รหัสนักศึกษาและค้นหารหัสนักศึกษาอื่นต่อไป
             </p>
             <br />
-            <p style={{ color: '#F5D3A2', fontSize: 18, marginTop: -25 }}>
-              หมายเหตุ: นักศึกษาที่รีรหัสนักศึกษาจาก B65 เป็น B66 ต้องใช้รหัสนักศึกษา B65XXXXX ในการค้นหาเท่านั้น
-            </p>
           </Box>
         </Grid>
 
@@ -212,15 +204,16 @@ function App() {
           <div onClick={togglePopup} className="overlay"></div>
           <div className="modal-content" style={{ color: '#141414' }}>
             <img style={{ height: 100, justifyItems: 'center' }} src={LogoEvent} alt="logo" />
-            <p style={{ fontSize: 38, fontWeight: 'bold', marginTop: -5 }}>{Grant}</p>
-            <p style={{ fontSize: 24, marginTop: -35 }}>
+            <Divider></Divider>
+            <p style={{ fontSize: 38, fontWeight: 'bold', marginTop: 10 }}>{Grant}</p>
+            <p style={{ fontSize: 28, marginTop: -35, marginBottom: 20 }}>
               {StudentID.toLocaleUpperCase()} {PrefixName}{FirstName} {LastName} <br />
-              {Major}
             </p>
+            <Divider></Divider>
             <i style={{ fontSize: 30, color: '#6D6D68' }}>
-              <p dangerouslySetInnerHTML={{ __html: replaceWithBr1() }} style={{ fontWeight: 'bold', marginTop: -10, color: '#141414' }} />
-              <p dangerouslySetInnerHTML={{ __html: replaceWithBr2() }} style={{ fontSize: 24, textAlign: 'left', marginTop: -30 }} />
-              <p dangerouslySetInnerHTML={{ __html: replaceWithBr3() }} style={{ fontSize: 22, marginTop: -30, fontWeight: 'bold', color: '#EE871B' }} />
+              <p dangerouslySetInnerHTML={{ __html: replaceWithBr1() }} style={{ fontWeight: 'bold', marginTop: 0, color: '#141414' }} />
+              <p dangerouslySetInnerHTML={{ __html: replaceWithBr2() }} style={{ fontSize: 24, textAlign: 'left', marginTop: -20 }} />
+              <p dangerouslySetInnerHTML={{ __html: replaceWithBr3() }} style={{ fontSize: 22, marginTop: -2, fontWeight: 'bold', color: '#EE871B' }} />
               <a style={{ fontWeight: 'bold', color: '#9A6914' }} target="_blank" href={FanpageUrl}>Facebook: ประสานงานเกียร์ มทส</a>
               <p style={{ fontSize: 24, marginTop: -5 }}>ด้วยความเคารพอย่างสูง</p>
             </i>
