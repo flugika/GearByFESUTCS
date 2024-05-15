@@ -1,8 +1,0 @@
-[app]
-type = "go"
-
-[[source]]
-path = "backend/"
-
-[build]
-cmd = "cd backend && go run main.go"
