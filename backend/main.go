@@ -1,13 +1,13 @@
 package main
 
 import (
-	// "log"
+	"log"
 	"os"
 
 	"github.com/flugika/GearByFESUTCS/controller"
 	"github.com/flugika/GearByFESUTCS/entity"
 	"github.com/gin-gonic/gin"
-	// "github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2"
 )
 
 const PORT = "8080"
@@ -24,21 +24,21 @@ func main() {
 	// Student Routes
 	r.GET("/student/:id", controller.GetStudent)
 
-	// app := fiber.New()
-	// app.Get("/", func(c *fiber.Ctx) error {
-	// 	return c.SendString("Hello World!")
-	// })
+	app := fiber.New()
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello World!")
+	})
 
-	// app.Get("/env", func(c *fiber.Ctx) error {
-	// 	return c.SendString("Hello ENV " + os.Getenv("ENV"))
-	// })
+	app.Get("/env", func(c *fiber.Ctx) error {
+		return c.SendString("Hello ENV " + os.Getenv("ENV"))
+	})
 
-	// port := os.Getenv("PORT")
-	// if port == "" {
-	// 	port = "8080"
-	// }
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-	// log.Fatal(app.Listen("0.0.0.0:" + port))
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 
 	// Run the server
 	r.Run(":" + PORT)
