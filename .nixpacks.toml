@@ -5,4 +5,4 @@ type = "go"
 path = "backend/"
 
 [build]
-cmd = "go run main.go"
+cmd = "cd backend && go run main.go"
