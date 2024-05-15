@@ -1,5 +1,3 @@
-[app]
-type = "go"
-
 [build]
+base = "golang:1.16"
 cmd = "go run main.go"
