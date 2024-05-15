@@ -1,0 +1,4 @@
+[phases]
+setup = "cd backend && go mod download"
+build = "cd backend && go build -o main ."
+start = "cd backend && ./main"
