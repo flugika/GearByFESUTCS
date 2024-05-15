@@ -23,7 +23,7 @@ function App() {
   const [Desciption3, setDesciption3] = useState<String>("");
 
   // Set URL
-  const apiUrl = "https://gear-fesutcs-api.herokuapp.com";
+  const apiUrl = "http://localhost:8080";
   const FanpageUrl = "https://www.facebook.com/Gear.sut";
 
   // Set function split newline \n
@@ -53,33 +53,34 @@ function App() {
   // Set Search Button
   async function Submit() {
     const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
     };
 
     let res = await fetch(
-      `${apiUrl}/student/${StudentID}`,
-      requestOptions
+        `${apiUrl}/student/${StudentID}`,
+        requestOptions
     )
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res[0])
-        if (res[0]) {
-          setPrefixName(res[0].PREFIXNAME)
-          setFirstName(res[0].STUDENTNAME)
-          setLastName(res[0].STUDENTSURNAME)
-          setGrant("ท่านมีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
-          setDesciption1("ณ อาคารเฉลิมพระเกียรติ 80 พรรษา | เวลา 12.00 น. เป็นต้นไป")
-          setDesciption2("1) กรุณานำบัตรนักศึกษาของตนเองมาเพื่อยืนยันตัวตนเข้างาน\n2) การแต่งกาย\n > 2.1) เสื้อวิศวะ สีเลือดหมู\n > 2.2) กางเกงขายาว ไม่ขาด ไม่มีลวดลาย สีสุภาพ\n > 2.3) เข็มขัดตรามหาวิทยาลัย\n > 2.4) สวมรองเท้าผ้าใบและถุงเท้า\n > 2.5) สามารถใส่ปลอกแขนได้ สี ดำ กรม เทา ขาว\n > 2.6) ไม่อนุญาตให้ใส่เสื้อแขนยาวเข้าร่วมงาน\n > 2.7) ไม่อนุญาตให้ใส่หมวกเข้าร่วมงาน\n > 2.8) หากนำกระเป๋าเข้างาน ต้องมีขนาดไม่เกินกระดาษ A5 (A4 พับครึ่ง)\n3) เริ่มลงทะเบียนเข้างาน 12:00 - 13:00 น. เท่านั้น กรุณามาให้ตรงเวลา")
-          setDesciption3(">> หากไม่ทำตามกฎระเบียบกำหนดการจะไม่มีสิทธิ์ได้เข้ารับเกียร์ <<")
-          return res[0].data;
+    .then((response) => response.json())
+    .then((res) => {
+        console.log(res)
+        console.log(res.data)
+        if (res.data) {
+            setPrefixName(res.data.PrefixName)
+            setFirstName(res.data.FirstName)
+            setLastName(res.data.LastName)
+            setGrant("ท่านมีสิทธิ์เข้าร่วมงานสร้อยน้องคล้องเกียร์พี่ครั้งที่ 9")
+            setDesciption1("ณ อาคารเฉลิมพระเกียรติ 80 พรรษา | เวลา 12.00 น. เป็นต้นไป")
+            setDesciption2("1) กรุณานำบัตรนักศึกษาของตนเองมาเพื่อยืนยันตัวตนเข้างาน\n2) การแต่งกาย\n > 2.1) เสื้อวิศวะ สีเลือดหมู\n > 2.2) กางเกงขายาว ไม่ขาด ไม่มีลวดลาย สีสุภาพ\n > 2.3) เข็มขัดตรามหาวิทยาลัย\n > 2.4) สวมรองเท้าผ้าใบและถุงเท้า\n > 2.5) สามารถใส่ปลอกแขนได้ สี ดำ กรม เทา ขาว\n > 2.6) ไม่อนุญาตให้ใส่เสื้อแขนยาวเข้าร่วมงาน\n > 2.7) ไม่อนุญาตให้ใส่หมวกเข้าร่วมงาน\n > 2.8) หากนำกระเป๋าเข้างาน ต้องมีขนาดไม่เกินกระดาษ A5 (A4 พับครึ่ง)\n3) เริ่มลงทะเบียนเข้างาน 12:00 - 13:00 น. เท่านั้น กรุณามาให้ตรงเวลา")
+            setDesciption3(">> หากไม่ทำตามกฎระเบียบกำหนดการจะไม่มีสิทธิ์ได้เข้ารับเกียร์ <<")
+            return res.data;
         } else {
-          Clear()
-          return false;
+            Clear()
+            return false;
         }
-      });
+    });
     togglePopup()
 
     return res;
